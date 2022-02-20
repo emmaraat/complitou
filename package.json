@@ -25,6 +25,7 @@
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "url": "^0.11.0",
     "uuidv4": "^6.2.12"
   },
   "devDependencies": {

@@ -71,7 +71,7 @@ router.post('/submitc', function(req, res, next) {
   sesSendValidation(confirmationcode_link, senderEmail)
       .then((val) => {
         console.log("got this back", val);
-        res.redirect('/'); //send them somewhere that specifies that they should check their email
+        res.redirect('/received'); //send them somewhere that specifies that they should check their email
       })
       .catch((err) => {
         res.redirect("/error"); //make this a page
@@ -79,13 +79,6 @@ router.post('/submitc', function(req, res, next) {
         console.log("There was an error!", err);
       });
   });
-
-
-//https://expressjs.com/en/guide/routing.html
-//create validation code, add it to the compliment sql
-//create route /val/:senderemail/:code
-//sending data via localhost:3000/val/actualemail/actualcode
-//access via req.params.senderemail and actualcode
 
 router.get("/confirm/:senderemail/:code", function(req, res) {
   var senderEmail = req.params.senderemail;
@@ -162,7 +155,7 @@ router.get("/confirm/:senderemail/:code", function(req, res) {
   }
 
   function sesSendCompliment(result) {
-    var texthtml = `<html><body>Hi there, '${result.targetName}'!<br>Someone you know wrote an anonoymous compliment to tell you how much you mean to them.<br>This was their lovely message:<br><i>'${result.message}'<i><br>If you'd like to send your own anonymous compliments to people you care about, please go to <a href='${hosturl}'>Complitou</a><br>Kind regards and best wishes,<br>Complitou</body></html>`
+    var texthtml = `<html><body>Hi there, '${result.targetName}'!<br>Someone you know wrote an anonoymous compliment to tell you how much you mean to them.<br>This was their lovely message:<br><i>'${result.message}'</i><br>If you'd like to send your own anonymous compliments to people you care about, please go to <a href='${hosturl}'>Complitou</a><br>Kind regards and best wishes,<br>Complitou</body></html>`
     var textnormal = "Hi there, "+ result.targetname +"!\nSomeone you know wrote an anonoymous compliment to tell you how much you mean to them.<br>This was their lovely message:\n"+ result.message+"\nIf you'd like to send your own anonymous compliments to people you care about, please go to "+hosturl+"\nKind regards and best wishes,\nComplitou"
 
     var params = {

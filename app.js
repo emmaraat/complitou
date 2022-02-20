@@ -21,13 +21,29 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(router);
-app.use("/", express.static("public"));
+//app.use("/", express.static("public"));
+
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+
+// 👇️ "/home/john/Desktop/javascript"
+const __dirname = path.dirname(__filename);
+console.log('directory-name', __dirname);
+
+app.use(express.static(__dirname+ '/public'));
+
+//app.use(express.static('public'))
 app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
 const host_url = "localhost:3000"
 const port = 3000;
 
 app.get("/hello", (request, response) => {
     response.status(200).send("hello world")
+});
+
+app.get("/faq", (request, response) => {
+  response.sendFile(__dirname + "/public/faqpage.html")
 });
 
 app.listen(port, () => {
