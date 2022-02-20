@@ -15,15 +15,11 @@ AWS SES is used to send emails to validate the sender email, and to send the act
 
 A big help for setting up the AWS SES SDK route was Erik Hanchett's (https://youtu.be/HiHflLTqiwU)[video] on AWS SES with Express and Javascript
 
-## To be added
-* Processing the validation link and actually sending the compliment to the receiver
-* A message to inform senders that they should check their email to validate their compliment
-* An FAQ page
-* Nicer formatting
-
 ## Challenges (future)
 * Since the emails are sent anonymously, there is a potential for abuse from people with ill intent. I would like to add a hatespeech detection algorithm in the back-end that scans compliments before they are allowed to pass through.
 * Similarly, there is a potential for spamming, which I hope to resolve by adding further use of my 'senders' database to record how long ago the email address sent their previous email, and rate limiting this.
+* The web app is currently only available via my local host, in the future I would like host it on AWS or other hosting service.
+* AWS SES: move out of Sandbox. AWS SES sandbox version only allows you to send emails from/to validated email addresses. I validated complitou@gmail.com and my personal email address, so I could test and demo my project, but would like to move out of the sandbox so the project would actually be usable by other people.
 
 ## Challenges (past)
 * It was my first time working with Node.js, Express, Bulma, AWS SES, and AWS RDS databases... A whole lot of new techniques in other words!
@@ -31,4 +27,4 @@ It was challenging to wrap my head around so many new syntax rules and make ever
 
 * Posting the HTML form to my router was giving me problems with an empty request body, which was solved by adding a BodyParser middleware.
 
-* Sending a dynamic link (the validation link) in the validation email proved to be quite difficult.
+* Sending a dynamic link (the validation link) in the validation email proved to be quite difficult, but with help from a mentor, I figured out the correct formatting in the html body.
