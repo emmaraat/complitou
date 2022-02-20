@@ -36,105 +36,43 @@ max-width: 100%;
 	
   </section>
   
-    <section id="mainpage" class="section">
-    <div class="container">
-		<div class="buttons">
-		  <button class="button is-link" id="demo" onclick="myFunction()">Click me to change my text color.</button>
-
-			<a class="button is-primary is-medium">
-			<i class="fas fa-hand-holding-heart pr-1"></i>Give a compliment</a>
-			<a class="button is-info is-medium">
-			<i class="fas fa-heart pr-1"></i> Redeem a compliment</a>
-			<a class="button is-medium is-link">
-			<i class="fas fa-question pr-1"></i> FAQ</a>
-		</div>
+  <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+	  <a class="navbar-item" href="http://localhost:3000">
+		Home
+	  </a>
+	  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+		<span aria-hidden="true"></span>
+		<span aria-hidden="true"></span>
+		<span aria-hidden="true"></span>
+	  </a>
 	</div>
-    </div>
-  </section>
-<!--   
-	<section id="inputcompliment" class="section">
-	  <form id="complimentForm" accept-charset="utf-8" method="POST" action="/submitc">
-		<div class="field">
-	<label class="label">To this lovely person:</label>
-	<div class="control has-icons-left
-	has-icons-right">
-		<input id="theirName" class="input" type="text" 
-		placeholder="Their name">			<span class="icon is-small 
-			is-left">
-				<i class="fas fa-heart"></i>
-			</span>
-	</div></div>
-	<div class="field">
-	<label class="label">At:</label>
-	<div class="control has-icons-left
-	has-icons-right">
-		<input id="theirEmail" class="input" type="email" 
-		placeholder="Their Email">
-			<span class="icon is-small 
-			is-left">
-				<i class="fas fa-envelope"></i>
-			</span>
-	</div></div>
-	
-		<div class="field">
-		<label class="label">I'd like to say:</label>
-		<textarea id="complimentContent" class="textarea is-primary" placeholder="Say something nice!"></textarea>
-		</div>
-		<div class="field">
-			<label class="label">From*:</label>
-	<div id="theiremailDiv" class="control has-icons-left
-	has-icons-right">
-		<input id="yourEmail" class="input" type="email" 
-		placeholder="Your Email">
-			<span class="icon is-small 
-			is-left">
-				<i class="fas fa-envelope"></i>
-			</span>
-	</div></div>
-<div class="field"><label class="checkbox">
-  <input type="checkbox">
-  * Send <strong>anonymously<strong>
-</label></div>
-
-<div class="field is-grouped">
-  <div class="control">
-    <button class="button is-link" type="submit" id="submitCompliment2server"> <i class="fas fa-paper-plane pr-1"></i>Submit</button>
-	</form>
-  </div>
-  </div>
-	</section> -->
   
+	<div id="navbarBasicExample" class="navbar-menu">
+	  <div class="navbar-start">
+ 
+		<a class="navbar-item" href="http://localhost:3000/faq">
+		  FAQ
+		</a>
+	  </div>
+	</div>
+  </nav>
+
+
 	<div class="section">
 		<h2>Submit A Compliment</h2>
 		<form action="/submitc" method="POST">
-			  <label>Their Name</label>
-			  <input type="text" placeholder="theirName" name="theirName" id="theirName" required><br>
-			  <label>Their Email Address</label>
-			  <input type="email" placeholder="theirEmail" name="theirEmail" id="theirEmail" required><br>
-			  <label>Your Email Address</label>
-			  <input type="city" placeholder="Enter yourEmail" name="yourEmail" id="yourEmail" required><br>
-			  <label>Your compliment</label>
-			  <input type="text" placeholder="Enter message" name="complimentContent" id="complimentContent" required><br>
-			  <button type="submit">Submit</button>
+			  <label class="label">Their Name</label>
+			  <input class="input is-link" type="text" placeholder="Enter Receiver's Name" name="theirName" id="theirName" required><br>
+			  <label  class="label">Their Email Address</label>
+			  <input class="input is-link" type="email" placeholder="Enter Receiver's Email" name="theirEmail" id="theirEmail" required><br>
+			  <label class="label"></label>Your Email Address</label>
+			  <input class="input is-link" type="city" placeholder="Enter Your Email" name="yourEmail" id="yourEmail" required><br>
+			  <label class="label">Your compliment</label>
+			  <input class="textarea is-link" type="text" placeholder="Write your lovely compliment" name="complimentContent" id="complimentContent" required><br>
+			  <button class="button is-link" type="submit">Submit Compliment</button>
 		</form>
 	</div>
-
-	
-      <section id="complimentmessage" class="section">
-    <div class="container">
-	  <article class="message is-info">
-	  <div class="message-header">
-		<p>Dear Name</p>
-	  </div>
-	  <div class="message-body" id="myCompliment">
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
-	  </div>
-	   <div class="message-body is-info-light">
-		<p>Xoxo Name</p>
-	  </div>
-	</article>
-    </div>
-  </section>
   
   <iframe name="diagonaliFrame" style="display:none;"><meta http-equiv="Content-type" content="text/html;charset=UTF-8"></iframe>
   

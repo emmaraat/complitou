@@ -46,6 +46,19 @@ app.get("/faq", (request, response) => {
   response.sendFile(__dirname + "/public/faqpage.html")
 });
 
+app.get("/success", (request, response) => {
+  response.sendFile(__dirname + "/public/successpage.html")
+});
+
+app.get("/error", (request, response) => {
+  response.sendFile(__dirname + "/public/errorpage.html")
+});
+
+app.get("/received", (request, response) => {
+  response.sendFile(__dirname + "/public/receivedpage.html")
+});
+
+
 app.listen(port, () => {
     console.log("port running on localhost 3000")
 });
