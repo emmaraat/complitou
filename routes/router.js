@@ -9,7 +9,7 @@ const { v4: uuidv4 } = pkg;
 
 let rawpass =  fs.readFileSync('C:\\Users\\Emma\\Documents\\complitou-app\\complitou\\routes\\passwords.json');
 let passwords = JSON.parse(rawpass);
-
+var hosturl = "http://localhost:3000"
 
 const router = express.Router();
 
@@ -49,7 +49,7 @@ router.post('/submitc', function(req, res, next) {
   var message = req.body.complimentContent;
   //create a confirmation code
   var confirmationcodeval = uuidv4();
-  var confirmationcode_link = "localhost:3000/confirm/" + senderEmail +"/"+confirmationcodeval
+  var confirmationcode_link = hosturl + "/confirm/" + senderEmail +"/"+confirmationcodeval
   //insert into database using parameters
   var check_sender = "PUT senders (nSend) VALUES (2) WHERE email = ?" //for known sender
   var sender_sql = "INSERT INTO senders (email, nSend) VALUES (?, 1)" //for new sender
@@ -87,10 +87,10 @@ router.post('/submitc', function(req, res, next) {
 //sending data via localhost:3000/val/actualemail/actualcode
 //access via req.params.senderemail and actualcode
 
-router.get("/val/:senderemail/:code", function(req, res) {
+router.get("/confirm/:senderemail/:code", function(req, res) {
   var senderEmail = req.params.senderemail;
   var validationcode =  req.params.code;
-
+  console.log("Lets validate senderemail " + senderEmail)
   dbconnection.connect(function(err) {
     if (err) {
         console.error('Database connection failed:' + err.stack)
@@ -98,17 +98,40 @@ router.get("/val/:senderemail/:code", function(req, res) {
         return;
     }
     console.log("Connected!");
-});
+  });
 
-//id targetName targetEmail message senderID validatedBool viewedBool viewdate"
-var validate_sql = "GET complitou (targetName, targetEmail, message, senderID, confirmationCode) WHERE senderID = ? AND confirmationCode = ?" 
+  //id targetName targetEmail message senderID validatedBool viewedBool viewdate"
+  var validate_sql = "SELECT * FROM complitou WHERE (senderEmail = ? AND confirmationCode = ? AND validatedBool = 0)" 
 
-dbconnection.query(sender_sql, [senderEmail], function(err, result) {
-    if (err) throw err;
-    console.log('sender record inserted');
-});
+  dbconnection.query(validate_sql, [senderEmail, validationcode], function(err, result) {
+      if (err) throw err;
+      console.log('retrieved compliment');
+      console.log(result)
+      //send email to compliment receiver
+      sesSendCompliment(result[0])
+        .then((val) => {
+          console.log("got this back", val);
+        })
+        .catch((err) => {
+          res.redirect("/error"); //make this a page
 
-  return
+          console.log("There was an error!", err);
+        });
+
+      //set validated bool to 1
+      var updateid = result[0].id;
+      console.log(updateid)
+      var update_sql = "UPDATE complitou set validatedBool = 1 WHERE id = ?" 
+      dbconnection.query(update_sql, [updateid], function(err, result) {
+        if (err) throw err;
+        console.log("updated validated bool")
+
+        res.redirect("/success");
+      });
+
+      //confirm that this has worked to sender
+      //TBA
+  });
 });
 
   function sesSendValidation(confirmationLink, senderEmail) {
@@ -138,15 +161,25 @@ dbconnection.query(sender_sql, [senderEmail], function(err, result) {
     return ses.sendEmail(params).promise();
   }
 
-  function sesSendCompliment(emailTo, emailFrom, message) {
+  function sesSendCompliment(result) {
+    var texthtml = `<html><body>Hi there, '${result.targetName}'!<br>Someone you know wrote an anonoymous compliment to tell you how much you mean to them.<br>This was their lovely message:<br><i>'${result.message}'<i><br>If you'd like to send your own anonymous compliments to people you care about, please go to <a href='${hosturl}'>Complitou</a><br>Kind regards and best wishes,<br>Complitou</body></html>`
+    var textnormal = "Hi there, "+ result.targetname +"!\nSomeone you know wrote an anonoymous compliment to tell you how much you mean to them.<br>This was their lovely message:\n"+ result.message+"\nIf you'd like to send your own anonymous compliments to people you care about, please go to "+hosturl+"\nKind regards and best wishes,\nComplitou"
+
     var params = {
       Destination: {
-        ToAddresses: [emailFrom]
+        ToAddresses: [result.targetEmail]
       },
       Message: {
         Body: {
-          Text: { Data: "Hi there!\nSomeone you know wrote an anonoymous compliment to tell you how much you mean to them\nThis was their lovely message:" + message }
+          Html: {
+          Charset: "UTF-8",
+          Data: texthtml,
         },
+        Text: {
+            Charset: "UTF-8",
+            Data: textnormal
+        }
+      },
   
         Subject: { Data: "Complitou: A Compliment To You"}
       },
