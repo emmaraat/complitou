@@ -1,0 +1,15 @@
+*.txt
+/node_modules
+Complitou.gif
+Complitou.png
+complitou_db.db
+notes.docx
+sendemail.php
+public/index - Copy bulma.html
+public/index - Copy pre express.html
+.env
+~$notes.docx
+sendemail.php.bak
+routes/passwords.json
+index.html.bak
+complitouscript.js.bak

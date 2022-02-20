@@ -1,0 +1,35 @@
+{
+  "name": "complitou",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --watch app.js"
+  },
+  "type": "module",
+  "author": "E.M. Raat",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1053.0",
+    "body-parser": "^1.19.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-flash": "^0.0.2",
+    "express-nocaptcha": "^1.1.1",
+    "express-recaptcha": "^5.0.2",
+    "express-session": "^1.17.2",
+    "fs": "^0.0.1-security",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "uuidv4": "^6.2.12"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.15"
+  }
+}
