@@ -1,6 +1,7 @@
 # complitou
 Web app to send anonymous compliments to friends
 Created by E.M. Raat in 2022 during Pearl Hacks 2022
+[Short demo video link](https://youtu.be/Ma5tsY5G6EA)
 
 ## Inspiration
 One of my friends is an amazing human being. I wanted to tell him some specific things I appreciate about him, but I was afraid that it would be awkward...
@@ -13,7 +14,7 @@ It uses Bulma, a CSS framework, for the formatting of the html.
 AWS RDS database is used to store information about the sender, receiver, and compliment message.
 AWS SES is used to send emails to validate the sender email, and to send the actual compliment to the receiver.
 
-A big help for setting up the AWS SES SDK route was Erik Hanchett's video tutorial (https://youtu.be/HiHflLTqiwU) on integrating AWS SES with Express and Javascript
+A big help for setting up the AWS SES SDK route was Erik Hanchett's [video tutorial](https://youtu.be/HiHflLTqiwU) on integrating AWS SES with Express and Javascript
 
 ## Challenges (future)
 * Since the emails are sent anonymously, there is a potential for abuse from people with ill intent. I would like to add a swearing/hatespeech detection algorithm in the back-end that scans compliments before they are allowed to pass through.
