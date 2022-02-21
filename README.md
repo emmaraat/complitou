@@ -1,6 +1,6 @@
 # complitou
-Web app to send anonymous compliments to friends
-Created by E.M. Raat in 2022 during Pearl Hacks 2022
+Web app to send anonymous compliments to friends created by E.M. Raat in 2022 during Pearl Hacks 2022
+
 [Short demo video link](https://youtu.be/Ma5tsY5G6EA)
 
 ## Inspiration
